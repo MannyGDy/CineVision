@@ -192,7 +192,4 @@ on <b> localhost:3000 </b>.
 https://user-images.githubusercontent.com/79381882/194945895-f7e2d2d2-4899-4ade-8c79-ecb647949ffd.mp4
 
 <h4>Main Page</h4>
-
 <img src="homa_page.jpg">
-
-[For more UI Images](https://github.com/VonHumbolt/CineVisionMicroserviceProject/tree/main/frontend)

@@ -63,7 +63,9 @@
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
     </dependencies>
-      <plugin>
+     <build>
+        <plugins>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -79,8 +81,5 @@
             </plugin>
         </plugins>
     </build>
-         
-    
-
 
 </project>

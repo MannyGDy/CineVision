@@ -69,7 +69,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.kaankaplan.emailservice.EmailServiceApplication</mainClass>
+                    <mainClass>com.kaankaplan.emailService.EmailServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,6 +1,0 @@
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/business/concretes/EmailServiceImpl.java
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/kafka/KafkaConsumer.java
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/EmailServiceApplication.java
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/config/FreeMarkerEmailTemplateConfig.java
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/dto/EmailMessageKafkaDto.java
-/root/CineVision/emailService/src/main/java/com/kaankaplan/emailService/business/abstracts/EmailService.java

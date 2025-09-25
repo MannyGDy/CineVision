@@ -1,26 +1,27 @@
-# Stage 1: Build dependencies
-FROM node:18-alpine AS build
-
+# Stage 1: Build React app
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
-# Copy source code
+# Copy source code and build
 COPY . .
+RUN npm run build
 
-# Stage 2: Runtime container
-FROM node:18-alpine
+# Stage 2: Nginx for serving static files
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
 
-WORKDIR /app
+# Remove default nginx static files
+RUN rm -rf ./*
 
-# Copy node_modules and source code from build stage
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app ./
+# Copy build output from builder
+COPY --from=builder /app/build .
 
-# Expose React dev server port
-EXPOSE 3000
+# Expose port
+EXPOSE 80
 
-# Start React dev server
-CMD ["npm", "start"]
+# Run Nginx
+CMD ["nginx", "-g", "daemon off;"]

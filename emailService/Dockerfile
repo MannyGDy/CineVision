@@ -13,6 +13,6 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
 # Copy jar from builder stage
-COPY --from=builder /app/email-service/target/*.jar app.jar
+COPY --from=builder /app/emailService/target/*.jar app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]

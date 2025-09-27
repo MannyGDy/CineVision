@@ -1,11 +1,11 @@
 server:
-  port: 0
+  port: ${SERVER_PORT:8080}   # default to 8080 if env not set
 
 ## Eureka Properties
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka:password@localhost:8761/eureka
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
     fetch-registry: true
     register-with-eureka: true
 
@@ -13,8 +13,8 @@ eureka:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
-      group-id: email
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      group-id: ${KAFKA_GROUP_ID:email}
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -24,24 +24,27 @@ spring:
             trusted:
               packages: "*"
             type:
-              mapping: event:com.kaankaplan.emailService.dto.EmailMessageKafkaDto
+              mapping: event:${KAFKA_MESSAGE_TYPE:com.kaankaplan.emailService.dto.EmailMessageKafkaDto}
     topic:
-      name: email_topics
+      name: ${KAFKA_TOPIC_NAME:email_topics}
+
   # Zipkin Properties
   zipkin:
-    base-url: http://localhost:9411
+    base-url: ${ZIPKIN_URL:http://localhost:9411}
+
   # Sleuth Properties
   sleuth:
     sampler:
-      probability: 1.0
+      probability: ${SLEUTH_SAMPLER_PROBABILITY:1.0}
+
   # Mail Properties
   mail:
     default-encoding: UTF-8
-    host: smtp.gmail.com
-    port: 587
-    username: python3.testmail@gmail.com # CHANGE with your email.
-    password: '*******'    # CHANGE with your password.
-    protocol: smtp
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:python3.testmail@gmail.com}
+    password: ${MAIL_PASSWORD:password}    # always inject real password via env
+    protocol: ${MAIL_PROTOCOL:smtp}
     test-connection: false
     properties:
       mail:
@@ -50,5 +53,5 @@ spring:
           starttls:
             enable: true
 
-  application:
-    name: emailService
+application:
+  name: emailService

@@ -44,7 +44,6 @@ services:
     ports:
       - "2181:2181"
 
-
   kafka:
     container_name: kafka
     image: wurstmeister/kafka
@@ -55,7 +54,6 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
     depends_on:
       - zookeeper
-
 
   keycloak:
     container_name: keycloak
@@ -79,6 +77,69 @@ services:
     image: redis
     ports:
       - "6379:6379"
+
+  # =====================
+  # Eureka Server
+  # =====================
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    env_file:
+      - .env
+    depends_on:
+      - zipkin
+
+  # =====================
+  # API Gateway
+  # =====================
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - eureka-server
+
+  # =====================
+  # Movie Service
+  # =====================
+  movie-service:
+    build: ./movie-service
+    container_name: movie-service
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - kafka
+      - eureka-server
+
+  # =====================
+  # User Service
+  # =====================
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+      - eureka-server
+
+  # =====================
+  # Email Service
+  # =====================
+  email-service:
+    build: ./email-service
+    container_name: email-service
+    env_file:
+      - .env
+    depends_on:
+      - kafka
+      - eureka-server
 
 volumes:
    postgres_data:

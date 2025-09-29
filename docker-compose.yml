@@ -108,7 +108,7 @@ services:
   # Movie Service
   # =====================
   movie-service:
-    build: ./movie-service
+    build: ./movieService
     container_name: movie-service
     env_file:
       - .env
@@ -121,7 +121,7 @@ services:
   # User Service
   # =====================
   user-service:
-    build: ./user-service
+    build: ./userService
     container_name: user-service
     env_file:
       - .env
@@ -133,7 +133,7 @@ services:
   # Email Service
   # =====================
   email-service:
-    build: ./email-service
+    build: ./emailService
     container_name: email-service
     env_file:
       - .env

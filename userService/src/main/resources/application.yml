@@ -7,15 +7,15 @@ spring:
   data:
     mongodb:
       authentication-database: admin
-      username: rootuser
-      password: rootpass
+      username: ${MONGO_INITDB_ROOT_USERNAME}
+      password: ${MONGO_INITDB_ROOT_PASSWORD}
       database: user
       port: 27017
-      host: localhost
+      host: {MONGO_HOST}
       auto-index-creation: true
   ## Zipkin and Sleuth Properties
   zipkin:
-    base-url: http://localhost:9411
+    base-url: ${ZIPKIN_URL:http://localhost:9411/zipkin}
   sleuth:
     sampler:
       probability: 1.0
@@ -24,11 +24,11 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka:password@localhost:8761/eureka
+      defaultZone: http://${EUREKA_USERNAME}:${EUREKA_PASSWORD}@${EUREKA_IN>
     fetch-registry: true
     register-with-eureka: true
 
 # JWT properties
 jwt:
   secret:
-    key: secret_secret_secret_secret_secret_secret_secret_secret_secret_secret
+    key: ${SECRET_KEY:secret_secret_secret_secret_secret_secret_secret_secret_secret_secret}

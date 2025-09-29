@@ -34,7 +34,7 @@ spring:
       name: ${KAFKA_TOPIC:email_topics}
 
   zipkin:
-    base-url: ${ZIPKIN_BASE_URL:http://zipkin:9411}
+    base-url: ${ZIPKIN_URL:http://zipkin:9411}
 
   sleuth:
     sampler:
